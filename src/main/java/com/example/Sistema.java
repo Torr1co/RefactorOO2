@@ -5,16 +5,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Sistema {
-	List<Cliente> lista1 = new ArrayList<Cliente>();
-	List<Llamada> lista2 = new ArrayList<Llamada>();
-	GuiaTelefonica lista3 = new GuiaTelefonica();
+	List<Cliente> clientes = new ArrayList<Cliente>();
+	List<Llamada> llamadas = new ArrayList<Llamada>();
+	GuiaTelefonica telefonosDisponibles = new GuiaTelefonica();
 	static double descuentoJur = 0.15;
 	static double descuentoFis = 0;
 	
 	public boolean agregarTelefono(String str) {
-		boolean encontre = lista3.guia.contains(str);
+		boolean encontre = telefonosDisponibles.guia.contains(str);
 		if (!encontre) {
-			lista3.guia.add(str);
+			telefonosDisponibles.guia.add(str);
 			encontre= true;
 			return encontre;
 		}
@@ -28,31 +28,31 @@ public class Sistema {
 		Cliente var = new Cliente();
 		if (t.equals("fisica")) {
 			var.setNombreYApellido(nombre);
-			String tel = lista3.guia.last();
-			lista3.guia.remove(tel);
+			String tel = telefonosDisponibles.guia.last();
+			telefonosDisponibles.guia.remove(tel);
 			var.setTipo(t);
 			var.setTelefono(tel);
 			var.setDni(data);
 		}
 		else if (t.equals("juridica")) {
-			String tel = lista3.guia.last();
-			lista3.guia.remove(tel);
+			String tel = telefonosDisponibles.guia.last();
+			telefonosDisponibles.guia.remove(tel);
 			var.setNombreYApellido(nombre);
 			var.setTipo(t);
 			var.setTelefono(tel);
 			var.setDni(data);
 		}
 		var.setSistema(this);;
-		lista1.add(var);
+		clientes.add(var);
 		return var;
 	}
 	
 	public boolean eliminarUsuario(Cliente p) {
-		List<Cliente> l = p.getSistema().lista1.stream().filter(persona -> persona != p).collect(Collectors.toList());
+		List<Cliente> l = p.getSistema().clientes.stream().filter(persona -> persona != p).collect(Collectors.toList());
 		boolean borre = false;
-		if (l.size() < lista1.size()) {
-			this.lista1 = l;
-			this.lista3.guia.add(p.getTelefono());
+		if (l.size() < clientes.size()) {
+			this.clientes = l;
+			this.telefonosDisponibles.guia.add(p.getTelefono());
 			borre = true;
 		}
 		return borre;
@@ -65,7 +65,7 @@ public class Sistema {
 		x.setEmisor(q.getTelefono());
 		x.setRemitente(q2.getTelefono());
 		x.dur= d;
-		lista2.add(x);
+		llamadas.add(x);
 		q.getLlamadasRealizadas().add(x);
 		return x;
 		
@@ -74,7 +74,7 @@ public class Sistema {
 	public double calcularMontoTotalLlamadas(Cliente p) {
 		double c = 0;
 		Cliente aux = null;
-		for (Cliente pp : lista1) {
+		for (Cliente pp : clientes) {
 			if (pp.getTelefono() == p.getTelefono()) {
 				aux = pp;
 				break;
@@ -101,11 +101,11 @@ public class Sistema {
 	}
 
 	public int cantidadDeUsuarios() {
-		return lista1.size();
+		return clientes.size();
 	}
 
 	public boolean existeUsuario(Cliente persona) {
-		return lista1.contains(persona);
+		return clientes.contains(persona);
 	}
 	
 }
