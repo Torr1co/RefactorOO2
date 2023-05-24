@@ -27,7 +27,7 @@ public class Sistema {
 	public Cliente registrarUsuario(String data, String nombre, String t) {
 		Cliente var = new Cliente();
 		if (t.equals("fisica")) {
-			var.setNombreYApellido(nombre);(nombre);
+			var.setNombreYApellido(nombre);
 			String tel = lista3.guia.last();
 			lista3.guia.remove(tel);
 			var.setTipo(t);
@@ -37,7 +37,7 @@ public class Sistema {
 		else if (t.equals("juridica")) {
 			String tel = lista3.guia.last();
 			lista3.guia.remove(tel);
-			var.setNombreYApellido(nombre)
+			var.setNombreYApellido(nombre);
 			var.setTipo(t);
 			var.setTelefono(tel);
 			var.setDni(data);

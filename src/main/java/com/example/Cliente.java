@@ -10,7 +10,7 @@ public class Cliente {
 	private String cuit;
 	private String dni;
 	private List<Llamada>llamadasRealizadas = new ArrayList<Llamada>(); ;
-	private Persoonal sistema;
+	private Sistema sistema;
 
 	public String getNombreYApellido() {
 		return nombreYApellido;
@@ -60,11 +60,11 @@ public class Cliente {
 		this.llamadasRealizadas = llamadasRealizadas;
 	}
 
-	public Persoonal getSistema() {
+	public Sistema getSistema() {
 		return sistema;
 	}
 
-	public void setSistema(Persoonal sistema) {
+	public void setSistema(Sistema sistema) {
 		this.sistema = sistema;
 	}
 
