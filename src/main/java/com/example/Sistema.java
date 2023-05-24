@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Persoonal {
+public class Sistema {
 	List<Cliente> lista1 = new ArrayList<Cliente>();
 	List<Llamada> lista2 = new ArrayList<Llamada>();
 	GuiaTelefonica lista3 = new GuiaTelefonica();
