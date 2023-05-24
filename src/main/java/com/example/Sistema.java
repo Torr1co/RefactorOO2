@@ -2,17 +2,19 @@ package com.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class Sistema {
 	List<Cliente> clientes = new ArrayList<Cliente>();
 	List<Llamada> llamadas = new ArrayList<Llamada>();
-	GuiaTelefonica telefonosDisponibles = new GuiaTelefonica();
+	SortedSet<String> telefonosDisponibles = new TreeSet<String>();
 
 	public boolean agregarTelefono(String str) {
-		boolean encontre = telefonosDisponibles.guia.contains(str);
+		boolean encontre = telefonosDisponibles.contains(str);
 		if (!encontre) {
-			telefonosDisponibles.guia.add(str);
+			telefonosDisponibles.add(str);
 			encontre= true;
 			return encontre;
 		}
@@ -25,18 +27,18 @@ public class Sistema {
 	public Cliente registrarUsuario(Cliente nuevoCliente){
 		nuevoCliente.setSistema(this);
 		clientes.add(nuevoCliente);
-		telefonosDisponibles.guia.remove(nuevoCliente.getTelefono());
+		telefonosDisponibles.remove(nuevoCliente.getTelefono());
 		return nuevoCliente;
 	}
 
 	public Cliente registrarPersonaFisica(String dni, String nombreYApellido){
-		String telefono = telefonosDisponibles.guia.last();
+		String telefono = telefonosDisponibles.last();
 		Cliente nuevoCliente = new PersonaFisica(dni, nombreYApellido, telefono);
 		return registrarUsuario(nuevoCliente)
 	}
 
 	public Cliente registrarPersonaJuridica(String dni, String nombreYApellido){
-		String telefono = telefonosDisponibles.guia.last();
+		String telefono = telefonosDisponibles.last();
 		Cliente nuevoCliente = new PersonaJuridica(dni, nombreYApellido, telefono);
 		return registrarUsuario(nuevoCliente);
 	}
@@ -46,7 +48,7 @@ public class Sistema {
 		boolean borre = false;
 		if (l.size() < clientes.size()) {
 			this.clientes = l;
-			this.telefonosDisponibles.guia.add(p.getTelefono());
+			this.telefonosDisponibles.add(p.getTelefono());
 			borre = true;
 		}
 		return borre;

@@ -1,39 +1,45 @@
 package com.example;
 
 public class Llamada {
-	protected String tipoDeLlamada;
-	private String emisor;
-	private String remitente;
-	public int dur;
-	
-	public Llamada() {
-		
-	}
-	public Llamada(String s, String p, String p2, Cliente p3, int dur) {
-		this.tipoDeLlamada = s;
-		this.emisor= p;
-		this.remitente= p2;
-		this.dur = dur;
-	}
+    protected String tipoDeLlamada;
+    private String emisor;
+    private String remitente;
+    public int dur;
 
-	public String getTipoDeLlamada() {
-		return tipoDeLlamada;
-	}
+    public Llamada() {
+        
+    }
+    public Llamada(String tipoDeLlamada, String emisor, String remitente, int dur) {
+        this.tipoDeLlamada = tipoDeLlamada;
+        this.emisor = emisor;
+        this.remitente = remitente;
+        this.dur = dur;
+    }
 
-	public void setTipoDeLlamada(String tipoDeLlamada) {
-		this.tipoDeLlamada = tipoDeLlamada;
-	}
-	public void setEmisor(String q) {
-		emisor = q;
-	}
-	public String getRemitente() {
-		return remitente;
-	}
-	public void setRemitente(String remitente) {
-		this.remitente = remitente;
-	}
-	
-	
-	
-	
+    public String getTipoDeLlamada() {
+        return tipoDeLlamada;
+    }
+
+    public void setTipoDeLlamada(String tipoDeLlamada) {
+        this.tipoDeLlamada = tipoDeLlamada;
+    }
+    public void setEmisor(String emisor) {
+        this.emisor = emisor;
+    }
+    public String getRemitente() {
+        return remitente;
+    }
+    public void setRemitente(String remitente) {
+        this.remitente = remitente;
+    }
+
+    public double calcularCosto() {
+        double costo = 0;
+        if (tipoDeLlamada.equals("nacional")) {
+            costo = dur * 3 + (dur * 3 * 0.21);
+        } else if (tipoDeLlamada.equals("internacional")) {
+            costo = dur * 200 + (dur * 200 * 0.21);
+        }
+        return costo;
+    }
 }
