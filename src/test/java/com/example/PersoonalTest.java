@@ -4,7 +4,7 @@ package com.example;
 class PersoonalTest {
 	
 	Persoonal sistema;
-	Persoona emisorPersonaFisca, remitentePersonaFisica, emisorPersonaJuridica, remitentePersonaJuridica;
+	Cliente emisorPersonaFisca, remitentePersonaFisica, emisorPersonaJuridica, remitentePersonaJuridica;
 	
 	@BeforeEach
 	public void setUp() {
@@ -42,7 +42,7 @@ class PersoonalTest {
 	void testAgregarUsuario() {
 		assertEquals(this.sistema.cantidadDeUsuarios(), 4);
 		this.sistema.agregarTelefono("2214444558"); 
-		Persoona nuevaPersona = this.sistema.registrarUsuario("2444555","Chiche Gelblung", "fisica");
+		Cliente nuevaPersona = this.sistema.registrarUsuario("2444555","Chiche Gelblung", "fisica");
 		
 		assertEquals(this.sistema.cantidadDeUsuarios(), 5);
 		assertTrue(this.sistema.existeUsuario(nuevaPersona));

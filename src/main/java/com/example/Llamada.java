@@ -9,7 +9,7 @@ public class Llamada {
 	public Llamada() {
 		
 	}
-	public Llamada(String s, String p, String p2, Persoona p3, int dur) {
+	public Llamada(String s, String p, String p2, Cliente p3, int dur) {
 		this.tipoDeLlamada = s;
 		this.emisor= p;
 		this.remitente= p2;

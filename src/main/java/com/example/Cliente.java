@@ -3,38 +3,38 @@ package com.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Persoona {
-	public List<Llamada> lista1 = new ArrayList<Llamada>();
-	public String t;
-	public String nya;
-	public String tel;
-	public String cuit;
-	public String doc;
-	public Persoonal sis;
+public class Cliente {
+	public String nombreYApellido;
+public String tipo;
+public String telefono;
+public String cuit;
+public String dni;
+public List<Llamada>llamadasRealizadas = new ArrayList<Llamada>(); ;
+public Persoonal sistema;
 	
-	public List<Llamada> getLista1() {
-		return lista1;
+	public List<Llamada> getllamadasRealizadas() {
+		return llamadasRealizadas;
 	}
-	public void setLista1(List<Llamada> lista1) {
-		this.lista1 = lista1;
+	public void setllamadasRealizadas(List<Llamada> llamadasRealizadas) {
+		this.llamadasRealizadas = llamadasRealizadas;
 	}
-	public String getT() {
-		return t;
+	public String getTipo() {
+		return tipo;
 	}
-	public void setT(String t) {
-		this.t = t;
+	public void setT(String tipo) {
+		this.tipo = tipo;
 	}
-	public String getNya() {
-		return nya;
+	public String getNombreYApellido() {
+		return nombreYApellido;
 	}
-	public void setNya(String nya) {
-		this.nya = nya;
+	public void setnombreYApellido(String nombreYApellido) {
+		this.nombreYApellido = nombreYApellido;
 	}
-	public String getTel() {
-		return tel;
+	public String getTelefono() {
+		return telefono;
 	}
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 	public String getCuit() {
 		return cuit;
@@ -42,11 +42,11 @@ public class Persoona {
 	public void setCuit(String cuit) {
 		this.cuit = cuit;
 	}
-	public String getDoc() {
-		return doc;
+	public String getDni() {
+		return dni;
 	}
-	public void setDoc(String doc) {
-		this.doc = doc;
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 	
 
