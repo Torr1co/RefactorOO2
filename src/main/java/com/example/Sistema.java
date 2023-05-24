@@ -8,7 +8,7 @@ public class Sistema {
 	List<Cliente> clientes = new ArrayList<Cliente>();
 	List<Llamada> llamadas = new ArrayList<Llamada>();
 	GuiaTelefonica telefonosDisponibles = new GuiaTelefonica();
-	
+
 	public boolean agregarTelefono(String str) {
 		boolean encontre = telefonosDisponibles.guia.contains(str);
 		if (!encontre) {
@@ -21,32 +21,28 @@ public class Sistema {
 			return encontre;
 		}
 	}
-	
-	public Cliente registrarUsuario(String data, String nombre, String t) {
-		Cliente var = new Cliente();
-		if (t.equals("fisica")) {
-			var.setNombreYApellido(nombre);
-			String tel = telefonosDisponibles.guia.last();
-			telefonosDisponibles.guia.remove(tel);
-			var.setTipo(t);
-			var.setTelefono(tel);
-			var.setDni(data);
-		}
-		else if (t.equals("juridica")) {
-			String tel = telefonosDisponibles.guia.last();
-			telefonosDisponibles.guia.remove(tel);
-			var.setNombreYApellido(nombre);
-			var.setTipo(t);
-			var.setTelefono(tel);
-			var.setDni(data);
-		}
-		var.setSistema(this);;
-		clientes.add(var);
-		return var;
+
+	public Cliente registrarUsuario(Cliente nuevoCliente){
+		nuevoCliente.setSistema(this);
+		clientes.add(nuevoCliente);
+		telefonosDisponibles.guia.remove(nuevoCliente.getTelefono());
+		return nuevoCliente;
+	}
+
+	public Cliente registrarPersonaFisica(String dni, String nombreYApellido){
+		String telefono = telefonosDisponibles.guia.last();
+		Cliente nuevoCliente = new PersonaFisica(dni, nombreYApellido, telefono);
+		return registrarUsuario(nuevoCliente)
+	}
+
+	public Cliente registrarPersonaJuridica(String dni, String nombreYApellido){
+		String telefono = telefonosDisponibles.guia.last();
+		Cliente nuevoCliente = new PersonaJuridica(dni, nombreYApellido, telefono);
+		return registrarUsuario(nuevoCliente);
 	}
 	
 	public boolean eliminarUsuario(Cliente p) {
-		List<Cliente> l = p.getSistema().clientes.stream().filter(persona -> persona != p).collect(Collectors.toList());
+		List<Cliente> l = p.getSistema().clientes.stream().filter(persona -> persona != pw).collect(Collectors.toList());
 		boolean borre = false;
 		if (l.size() < clientes.size()) {
 			this.clientes = l;
@@ -86,12 +82,7 @@ public class Sistema {
 				} else if (l.tipoDeLlamada == "internacional") {
 					auxc += l.dur *200 + (l.dur*200*0.21);
 				}
-				
-				if (aux.getTipo() == "fisica") {
-					auxc -= auxc*aux.getDescuentoFisico();
-				} else if(aux.getTipo() == "juridica") {
-					auxc -= auxc*aux.getDescuentoJuridico();
-				}
+				auxc -= auxc * aux.getDescuento();
 				c += auxc;
 			}
 		}
