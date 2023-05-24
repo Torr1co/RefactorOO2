@@ -60,7 +60,7 @@ public class Sistema {
 		x.tipoDeLlamada = t;
 		x.setEmisor(q.getTelefono());
 		x.setRemitente(q2.getTelefono());
-		x.dur= d;
+		x.duracion= d;
 		llamadas.add(x);
 		q.getLlamadasRealizadas().add(x);
 		return x;
@@ -80,9 +80,9 @@ public class Sistema {
 			for (Llamada l : aux.getLlamadasRealizadas()) {
 				double auxc = 0;
 				if (l.tipoDeLlamada == "nacional") {
-					auxc += l.dur *3 + (l.dur*3*0.21);
+					auxc += l.duracion *3 + (l.duracion*3*0.21);
 				} else if (l.tipoDeLlamada == "internacional") {
-					auxc += l.dur *200 + (l.dur*200*0.21);
+					auxc += l.duracion *200 + (l.duracion*200*0.21);
 				}
 				auxc -= auxc * aux.getDescuento();
 				c += auxc;

@@ -4,16 +4,16 @@ public class Llamada {
     protected String tipoDeLlamada;
     private String emisor;
     private String remitente;
-    public int dur;
+    public int duracion;
 
     public Llamada() {
         
     }
-    public Llamada(String tipoDeLlamada, String emisor, String remitente, int dur) {
+    public Llamada(String tipoDeLlamada, String emisor, String remitente, int duracion) {
         this.tipoDeLlamada = tipoDeLlamada;
         this.emisor = emisor;
         this.remitente = remitente;
-        this.dur = dur;
+        this.duracion = duracion;
     }
 
     public String getTipoDeLlamada() {
@@ -36,9 +36,9 @@ public class Llamada {
     public double calcularCosto() {
         double costo = 0;
         if (tipoDeLlamada.equals("nacional")) {
-            costo = dur * 3 + (dur * 3 * 0.21);
+            costo = duracion * 3 + (duracion * 3 * 0.21);
         } else if (tipoDeLlamada.equals("internacional")) {
-            costo = dur * 200 + (dur * 200 * 0.21);
+            costo = duracion * 200 + (duracion * 200 * 0.21);
         }
         return costo;
     }
