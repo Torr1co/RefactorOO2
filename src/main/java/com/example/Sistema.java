@@ -8,8 +8,6 @@ public class Sistema {
 	List<Cliente> clientes = new ArrayList<Cliente>();
 	List<Llamada> llamadas = new ArrayList<Llamada>();
 	GuiaTelefonica telefonosDisponibles = new GuiaTelefonica();
-	static double descuentoJur = 0.15;
-	static double descuentoFis = 0;
 	
 	public boolean agregarTelefono(String str) {
 		boolean encontre = telefonosDisponibles.guia.contains(str);
@@ -90,9 +88,9 @@ public class Sistema {
 				}
 				
 				if (aux.getTipo() == "fisica") {
-					auxc -= auxc*descuentoFis;
+					auxc -= auxc*aux.getDescuentoFisico();
 				} else if(aux.getTipo() == "juridica") {
-					auxc -= auxc*descuentoJur;
+					auxc -= auxc*aux.getDescuentoJuridico();
 				}
 				c += auxc;
 			}
