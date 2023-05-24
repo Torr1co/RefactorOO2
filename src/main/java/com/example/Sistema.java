@@ -34,7 +34,7 @@ public class Sistema {
 	public Cliente registrarPersonaFisica(String dni, String nombreYApellido){
 		String telefono = telefonosDisponibles.last();
 		Cliente nuevoCliente = new PersonaFisica(dni, nombreYApellido, telefono);
-		return registrarUsuario(nuevoCliente)
+		return registrarUsuario(nuevoCliente);
 	}
 
 	public Cliente registrarPersonaJuridica(String dni, String nombreYApellido){
@@ -56,15 +56,10 @@ public class Sistema {
 	}
 	
 	public Llamada registrarLlamada(Cliente q, Cliente q2, String t, int d) {
-		Llamada x = new Llamada();
-		x.tipoDeLlamada = t;
-		x.setEmisor(q.getTelefono());
-		x.setRemitente(q2.getTelefono());
-		x.duracion= d;
+		Llamada x = new Llamada(t, q.getTelefono(), q2.getTelefono(), d);
 		llamadas.add(x);
 		q.getLlamadasRealizadas().add(x);
 		return x;
-		
 	}
 	
 	public double calcularMontoTotalLlamadas(Cliente p) {
@@ -79,11 +74,7 @@ public class Sistema {
 		if (aux != null) {
 			for (Llamada l : aux.getLlamadasRealizadas()) {
 				double auxc = 0;
-				if (l.tipoDeLlamada == "nacional") {
-					auxc += l.duracion *3 + (l.duracion*3*0.21);
-				} else if (l.tipoDeLlamada == "internacional") {
-					auxc += l.duracion *200 + (l.duracion*200*0.21);
-				}
+				auxc += l.calcularCosto();
 				auxc -= auxc * aux.getDescuento();
 				c += auxc;
 			}

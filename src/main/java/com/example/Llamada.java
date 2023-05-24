@@ -1,10 +1,10 @@
 package com.example;
 
 public class Llamada {
-    protected String tipoDeLlamada;
-    private String emisor;
+    private String tipoDeLlamada;
+	private String emisor;
     private String remitente;
-    public int duracion;
+    private int duracion;
 
     public Llamada() {
         
@@ -23,14 +23,25 @@ public class Llamada {
     public void setTipoDeLlamada(String tipoDeLlamada) {
         this.tipoDeLlamada = tipoDeLlamada;
     }
+
     public void setEmisor(String emisor) {
         this.emisor = emisor;
     }
+
     public String getRemitente() {
         return remitente;
     }
+
     public void setRemitente(String remitente) {
         this.remitente = remitente;
+    }
+
+	public int getDuracion() {
+        return duracion;
+    }
+
+    public void setDuracion(int duracion) {
+        this.duracion = duracion;
     }
 
     public double calcularCosto() {
