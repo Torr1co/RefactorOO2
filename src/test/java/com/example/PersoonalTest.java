@@ -1,6 +1,5 @@
 package com.example;
 
-
 class PersoonalTest {
 	
 	Persoonal sistema;
