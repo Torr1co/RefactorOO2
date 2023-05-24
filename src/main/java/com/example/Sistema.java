@@ -44,7 +44,7 @@ public class Sistema {
 	}
 	
 	public boolean eliminarUsuario(Cliente p) {
-		List<Cliente> l = p.getSistema().clientes.stream().filter(persona -> persona != pw).collect(Collectors.toList());
+		List<Cliente> l = p.getSistema().clientes.stream().filter(persona -> persona != p).collect(Collectors.toList());
 		boolean borre = false;
 		if (l.size() < clientes.size()) {
 			this.clientes = l;

@@ -1,8 +1,8 @@
 package com.example;
 
 public class Llamada {
-    private String tipoDeLlamada;
 	private String emisor;
+    private String tipoDeLlamada;
     private String remitente;
     private int duracion;
 
