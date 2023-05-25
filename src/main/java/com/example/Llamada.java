@@ -1,39 +1,16 @@
 package com.example;
 
-public class Llamada {
-	protected String tipoDeLlamada;
-	private String emisor;
-	private String remitente;
-	public int dur;
-	
-	public Llamada() {
-		
-	}
-	public Llamada(String s, String p, String p2, Cliente p3, int dur) {
-		this.tipoDeLlamada = s;
-		this.emisor= p;
-		this.remitente= p2;
-		this.dur = dur;
-	}
+public abstract class Llamada {
+    protected int duracion;
+    private String emisor;
+    private String remitente;
+    protected static final double PORCENTAJE_IVA = 0.21;
 
-	public String getTipoDeLlamada() {
-		return tipoDeLlamada;
-	}
-
-	public void setTipoDeLlamada(String tipoDeLlamada) {
-		this.tipoDeLlamada = tipoDeLlamada;
-	}
-	public void setEmisor(String q) {
-		emisor = q;
-	}
-	public String getRemitente() {
-		return remitente;
-	}
-	public void setRemitente(String remitente) {
-		this.remitente = remitente;
-	}
-	
-	
-	
-	
+    public Llamada(int duracion, String emisor, String remitente) {
+        this.duracion = duracion;
+        this.emisor = emisor;
+        this.remitente = remitente;
+    }
+    
+    public abstract double calcularCosto();
 }
