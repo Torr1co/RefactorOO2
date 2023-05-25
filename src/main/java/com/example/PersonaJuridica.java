@@ -8,10 +8,6 @@ public class PersonaJuridica extends Cliente {
         super(nombreYApellido, telefono);
         this.cuit = cuit;
     }
-
-    public String getCuit() {
-        return cuit;
-    }
     
     public double getDescuento(){
         return DESCUENTO_JURIDICA;

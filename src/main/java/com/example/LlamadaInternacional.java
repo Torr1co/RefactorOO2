@@ -8,7 +8,7 @@ public class LlamadaInternacional extends Llamada{
 
     @Override
     public double calcularCosto() {
-        double costo = duracion * PRECIO_X_MINUTO + (duracion * PRECIO_X_MINUTO * 0.21);
+        double costo = duracion * PRECIO_X_MINUTO + (duracion * PRECIO_X_MINUTO * PORCENTAJE_IVA);
         return costo;
     }
 }

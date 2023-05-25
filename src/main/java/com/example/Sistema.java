@@ -7,7 +7,6 @@ import java.util.TreeSet;
 
 public class Sistema {
 	List<Cliente> clientes = new ArrayList<Cliente>();
-	List<Llamada> llamadas = new ArrayList<Llamada>();
 	SortedSet<String> telefonosDisponibles = new TreeSet<String>();
 
 
@@ -27,7 +26,6 @@ public class Sistema {
 			return null;
 		}
 		telefonosDisponibles.remove(telefonoDisponible);
-		cliente.setSistema(this);
 		clientes.add(cliente);
 		return cliente;
 	  }
@@ -41,7 +39,6 @@ public class Sistema {
 		} else {
 			return null;
 		}
-		llamadas.add(nuevaLlamada);
 		clienteEmisor.agregarLlamada(nuevaLlamada);
 		return nuevaLlamada;
 	}
