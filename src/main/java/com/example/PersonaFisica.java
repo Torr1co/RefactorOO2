@@ -2,7 +2,7 @@ package com.example;
 
 public class PersonaFisica  extends Cliente{
     private String dni; 
-    static double descuentoFis = 0;
+    private static final double DESCUENTO_FISICA = 0;
 
     public PersonaFisica(String dni, String nombreYApellido, String telefono) {
         super(nombreYApellido, telefono);
@@ -11,8 +11,9 @@ public class PersonaFisica  extends Cliente{
 
     public String getDni() {
         return dni;
-    }    
+    }
+
     public double getDescuento(){
-        return descuentoFis;
+        return DESCUENTO_FISICA;
     }
 }

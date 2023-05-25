@@ -47,4 +47,11 @@ public abstract class Cliente {
   public void setSistema(Sistema sistema) {
       this.sistema = sistema;
   }
+  public double calcularCosteLlamadas() {
+    return llamadasRealizadas.stream().mapToDouble(llamada -> llamada.calcularCosto() - (llamada.calcularCosto() * getDescuento())).sum();
+  }       
+
+  public void agregarLlamada(Llamada llamada) {
+    llamadasRealizadas.add(llamada);
+  }  
 }

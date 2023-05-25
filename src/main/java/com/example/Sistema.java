@@ -4,90 +4,66 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.stream.Collectors;
 
 public class Sistema {
 	List<Cliente> clientes = new ArrayList<Cliente>();
 	List<Llamada> llamadas = new ArrayList<Llamada>();
 	SortedSet<String> telefonosDisponibles = new TreeSet<String>();
 
-	public boolean agregarTelefono(String str) {
-		boolean encontre = telefonosDisponibles.contains(str);
-		if (!encontre) {
-			telefonosDisponibles.add(str);
-			encontre= true;
-			return encontre;
+
+	public boolean agregarTelefono(String telefono) {
+		return telefonosDisponibles.add(telefono);
+	}
+
+	public Cliente registrarUsuario(String identificacion, String nombreYApellido, String tipo) {
+		Cliente cliente; 
+		String telefonoDisponible = telefonosDisponibles.last();
+		if (tipo.equals("fisica")) {
+			cliente = new PersonaFisica(identificacion,nombreYApellido,telefonoDisponible);
+		} else if (tipo.equals("juridica")) {
+			cliente = new PersonaJuridica(identificacion,nombreYApellido,telefonoDisponible);
 		}
 		else {
-			encontre= false;
-			return encontre;
+			return null;
 		}
-	}
-
-	public Cliente registrarUsuario(Cliente nuevoCliente){
-		nuevoCliente.setSistema(this);
-		clientes.add(nuevoCliente);
-		telefonosDisponibles.remove(nuevoCliente.getTelefono());
-		return nuevoCliente;
-	}
-
-	public Cliente registrarPersonaFisica(String dni, String nombreYApellido){
-		String telefono = telefonosDisponibles.last();
-		Cliente nuevoCliente = new PersonaFisica(dni, nombreYApellido, telefono);
-		return registrarUsuario(nuevoCliente);
-	}
-
-	public Cliente registrarPersonaJuridica(String dni, String nombreYApellido){
-		String telefono = telefonosDisponibles.last();
-		Cliente nuevoCliente = new PersonaJuridica(dni, nombreYApellido, telefono);
-		return registrarUsuario(nuevoCliente);
+		telefonosDisponibles.remove(telefonoDisponible);
+		cliente.setSistema(this);
+		clientes.add(cliente);
+		return cliente;
+	  }
+	
+	public Llamada registrarLlamada(Cliente clienteEmisor, Cliente clienteReceptor, String tipo, int duracion) {
+		Llamada nuevaLlamada;
+		if (tipo.equals("nacional")) {
+			nuevaLlamada = new LlamadaNacional(duracion, clienteEmisor.getTelefono(), clienteReceptor.getTelefono());
+		} else if (tipo.equals("internacional")) {
+			nuevaLlamada = new LlamadaInternacional(duracion, clienteEmisor.getTelefono(), clienteReceptor.getTelefono());
+		} else {
+			return null;
+		}
+		llamadas.add(nuevaLlamada);
+		clienteEmisor.agregarLlamada(nuevaLlamada);
+		return nuevaLlamada;
 	}
 	
-	public boolean eliminarUsuario(Cliente p) {
-		List<Cliente> l = p.getSistema().clientes.stream().filter(persona -> persona != p).collect(Collectors.toList());
-		boolean borre = false;
-		if (l.size() < clientes.size()) {
-			this.clientes = l;
-			this.telefonosDisponibles.add(p.getTelefono());
-			borre = true;
+	public double calcularMontoTotalLlamadas(Cliente cliente) {
+		double montoTotal = 0;
+		if (clientes.contains(cliente)) {
+			montoTotal = cliente.calcularCosteLlamadas();
 		}
-		return borre;
-		
+		return montoTotal;
 	}
-	
-	public Llamada registrarLlamada(Cliente q, Cliente q2, String t, int d) {
-		Llamada x = new Llamada(t, q.getTelefono(), q2.getTelefono(), d);
-		llamadas.add(x);
-		q.getLlamadasRealizadas().add(x);
-		return x;
-	}
-	
-	public double calcularMontoTotalLlamadas(Cliente p) {
-		double c = 0;
-		Cliente aux = null;
-		for (Cliente pp : clientes) {
-			if (pp.getTelefono() == p.getTelefono()) {
-				aux = pp;
-				break;
-			}
-		} if (aux == null) return c;
-		if (aux != null) {
-			for (Llamada l : aux.getLlamadasRealizadas()) {
-				double auxc = 0;
-				auxc += l.calcularCosto();
-				auxc -= auxc * aux.getDescuento();
-				c += auxc;
-			}
-		}
-		return c;
+	  
+	public boolean eliminarUsuario(Cliente cliente) {
+		return clientes.remove(cliente);
 	}
 
 	public int cantidadDeUsuarios() {
 		return clientes.size();
 	}
 
-	public boolean existeUsuario(Cliente persona) {
-		return clientes.contains(persona);
+	public boolean existeUsuario(Cliente cliente ) {
+		return clientes.contains(cliente);
 	}
 	
 }
